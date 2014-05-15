@@ -6,7 +6,7 @@ AppHobo::Application.routes.draw do
 
 
   # Resource routes for controller microposts
-  resources :microposts
+  resources :microposts, :only => [:index, :edit, :show, :update, :destroy]
 
 
   # Resource routes for controller users

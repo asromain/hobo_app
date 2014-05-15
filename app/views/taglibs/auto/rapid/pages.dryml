@@ -34,9 +34,6 @@
     </content-header:>
 
     <content-body: param>
-      <a action="new" to="&model" param="new-link">
-        <ht key="micropost.actions.new">New Micropost</ht>
-      </a>
 
       <page-nav param="top-page-nav"/>
 
@@ -94,6 +91,7 @@
 
     <content-body: param>
       <view:content param="description" />
+      <field-list fields="user" param/>
     </content-body:>
 
   </page>

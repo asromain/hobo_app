@@ -7,7 +7,8 @@ class Micropost < ActiveRecord::Base
     user_id :integer
     timestamps
   end
-  attr_accessible :content, :user_id
+  attr_accessible :content, :user_id, :user
+  belongs_to :user, inverse_of: :microposts
 
   # --- Permissions --- #
 

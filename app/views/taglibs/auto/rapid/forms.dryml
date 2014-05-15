@@ -4,7 +4,7 @@
 <def tag="form" for="Micropost">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="content" param/>
+    <field-list fields="content, user" param/>
     <div param="actions">
       <submit label="#{ht 'micropost.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
@@ -16,7 +16,7 @@
 <def tag="form" for="User">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="name, email_address, administrator, state" param/>
+    <field-list fields="name, email_address, administrator, state, microposts" param/>
     <div param="actions">
       <submit label="#{ht 'user.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
