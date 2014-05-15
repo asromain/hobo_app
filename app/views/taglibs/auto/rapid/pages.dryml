@@ -6,8 +6,121 @@
 <def tag="main-nav">
   <navigation class="main-nav" merge-attrs param="default">
     <nav-item href="#{base_url}/">Home</nav-item>
+    <nav-item with="&Micropost"><ht key="micropost.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
   </navigation>
 </def>
+
+
+
+
+<!-- ====== Micropost Pages ====== -->
+
+<def tag="index-page" for="Micropost">
+  <page merge title="#{ht 'micropost.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page micropost" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="micropost.index.heading">
+          <model-name-human model="&model"/>
+        </ht>
+      </h2>
+
+      <p param="count" if>
+        <ht key="micropost.collection.count" count="&collection_count">
+          <count summary/>
+        </ht>
+      </p>
+    </content-header:>
+
+    <content-body: param>
+      <a action="new" to="&model" param="new-link">
+        <ht key="micropost.actions.new">New Micropost</ht>
+      </a>
+
+      <page-nav param="top-page-nav"/>
+
+      <collection param/>
+
+      <page-nav param="bottom-page-nav"/>
+
+
+    </content-body:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Micropost">
+  <page merge title="#{ht 'micropost.new.title', :default=>[' New Micropost'] }">
+    <body: class="new-page micropost" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="micropost.new.heading">
+          New Micropost
+        </ht>
+      </h2>
+    </content-header:>
+
+    <content-body: param>
+      <form param>
+        <submit: label="#{ht 'micropost.actions.create', :default=>['Create Micropost']}"/>
+      </form>
+    </content-body:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Micropost">
+  <page merge title="#{ht 'micropost.show.title', :default=>['Micropost'], :name => name(:no_wrapper => true) }" without-aside >
+
+    <body: class="show-page micropost" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="micropost.show.heading" name="#{name(:no_wrapper => true)}">
+          Micropost <name/>
+        </ht>
+      </h2>
+
+      <record-flags fields="" param/>
+
+      <a action="edit" if="&can_edit?" param="edit-link">
+        <ht key="micropost.actions.edit" name="#{name(:no_wrapper => true)}">
+          Edit Micropost
+        </ht>
+      </a>
+    </content-header:>
+
+    <content-body: param>
+      <view:content param="description" />
+    </content-body:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Micropost">
+  <page merge title="#{ht 'micropost.edit.title', :default=>['Edit Micropost'], :name => name(:no_wrapper => true) }">
+
+    <body: class="edit-page micropost" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="micropost.edit.heading" name="#{name(:no_wrapper => true)}">
+          Edit Micropost
+        </ht>
+      </h2>
+      <delete-button label="#{ht 'micropost.actions.delete', :default=>['Remove This Micropost']}" param/>
+    </content-header:>
+
+    <content-body: param>
+      <form param/>
+    </content-body:>
+
+  </page>
+</def>
+
 
 
 
@@ -86,7 +199,7 @@
         </ht>
       </h2>
 
-      <record-flags fields="" param/>
+      <record-flags fields="administrator" param/>
 
       <a action="edit" if="&can_edit?" param="edit-link">
         <ht key="user.actions.edit" name="#{name(:no_wrapper => true)}">
@@ -96,6 +209,7 @@
     </content-header:>
 
     <content-body: param>
+      <field-list fields="email_address, state" param/>
     </content-body:>
 
   </page>

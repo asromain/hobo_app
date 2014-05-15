@@ -1,6 +1,14 @@
 <!-- AUTOMATICALLY GENERATED FILE - DO NOT EDIT -->
 
 
+<def tag="card" for="Micropost">
+  <card class="micropost" param="default" merge>
+    <body: param>
+      <view:content param="description"/>
+    </body:>
+  </card>
+</def>
+
 <def tag="card" for="User">
   <card class="user" param="default" merge>
     <header: param>
