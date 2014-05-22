@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :reverse_relationships, inverse_of: :followed, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
   has_many :followed_users, inverse_of: :relationships, through: :relationships, source: :followed, accessible: true
 
-  # This gives admin rights and an :active state to the first sign-up.
+  # This gives admin rights and an :active state to the first sign-up...
   # Just remove it if you don't want that
   before_create do |user|
     if !Rails.env.test? && user.class.count == 0
