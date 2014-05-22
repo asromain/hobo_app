@@ -8,8 +8,12 @@ class User < ActiveRecord::Base
     administrator :boolean, :default => false
     timestamps
   end
-  attr_accessible :name, :email_address, :password, :password_confirmation, :current_password, :microposts
+  attr_accessible :name, :email_address, :password, :password_confirmation, :current_password, :microposts, :relationship
   has_many :microposts, inverse_of: :user, accessible: true
+  has_many :relationships, inverse_of: :follower, foreign_key: "follower_id", dependent: :destroy
+  has_many :followers, inverse_of: :relationships, through: :reverse_relationships, source: :follower, accessible: true
+  has_many :reverse_relationships, inverse_of: :followed, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
+  has_many :followed_users, inverse_of: :relationships, through: :relationships, source: :followed, accessible: true
 
   # This gives admin rights and an :active state to the first sign-up.
   # Just remove it if you don't want that

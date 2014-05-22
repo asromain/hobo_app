@@ -145,9 +145,6 @@
     </content-header:>
 
     <content-body: param>
-      <a action="new" to="&model" param="new-link">
-        <ht key="relationship.actions.new">New Relationship</ht>
-      </a>
 
       <page-nav param="top-page-nav"/>
 
@@ -204,6 +201,7 @@
     </content-header:>
 
     <content-body: param>
+      <field-list fields="followed, follower" param/>
     </content-body:>
 
   </page>

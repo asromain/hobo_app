@@ -3,11 +3,12 @@ class Relationship < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   fields do
-    follower_id :integer
-    followed_id :integer
     timestamps
   end
-  attr_accessible :follower_id, :followed_id
+
+  belongs_to :follower, class_name: "User", inverse_of: :relationships
+  belongs_to :followed, class_name: "User", inverse_of: :reverse_relationships
+  
 
   # --- Permissions --- #
 
